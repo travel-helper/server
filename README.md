@@ -1,6 +1,4 @@
 # server
-
-
 ### 폴더 구조 
 ```
 📂git/travle-helper/server
@@ -26,8 +24,8 @@
  📃 services/service
  ```
  
- ```
  ### 실행 방법
+ ```
  npm run start 
  npm run dev (nodemon : 개발시)
 ```
