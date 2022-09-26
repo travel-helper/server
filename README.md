@@ -1,7 +1,7 @@
 # server
 
 
-##폴더 구조 
+## 폴더 구조 
 ```
 📂git/travle-helper/server
   ┣📂 src
@@ -18,7 +18,7 @@
   ┣📂 package.json
   ┣📂 package-lock.json
   ```
- ##API 파일
+ ## API 파일
  ```
  📃 app.js
  📃 routers/router.js
@@ -26,7 +26,7 @@
  📃 services/service
  ```
  ```
- ##실행 방법
+ ## 실행 방법
  npm run start 
  npm run dev (nodemon : 개발시)
 ```
