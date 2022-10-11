@@ -1,12 +1,11 @@
-const express  = require("express");
+const express = require("express");
 const router = express.Router();
 const adminRouter = require("./admin.router");
-const applyRouter = require('./apply.router');
+const applyRouter = require("./apply.router");
 
 module.exports = () => {
+  adminRouter(router);
+  applyRouter(router);
 
-    adminRouter(router);
-    applyRouter(router);
-
-    return router;
-}
+  return router;
+};
