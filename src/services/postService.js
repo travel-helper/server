@@ -1,10 +1,13 @@
-const Post =require('../models/post')
+const Post = require("../models/post");
 // const { Op } = require('sequelize');
 
-exports.loadPosts = async function (lastId){
+const baseResponse = require("../utilities/baseResponseStatus");
+const { errResponse, response } = require("../utilities/response");
 
-        const posts = await Post.findAll({
-                attributes:['id','text']})   //임시
-        
-        return posts
-    }
+exports.loadPosts = async function (lastId) {
+  const posts = await Post.findAll({
+    attributes: ["id", "text"],
+  }); //임시
+
+  return posts;
+};
