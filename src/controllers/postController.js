@@ -1,8 +1,11 @@
-const postService = require('../services/postService')
+const postService = require("../services/postService");
 // const baseResponse = require('../utilities/baseResponseStatus')
 
-exports.loadPosts = async function (req,res){
-    const lastId = req.query.lastId;
-    const result = await postService.loadPosts(lastId);
-    return res.status(200).json(result);
-}
+const baseResponse = require("../utilities/baseResponseStatus");
+const { errResponse, response } = require("../utilities/response");
+
+exports.loadPosts = async function (req, res) {
+  const lastId = req.query.lastId;
+  const result = await postService.loadPosts(lastId);
+  return res.status(200).json(result);
+};
