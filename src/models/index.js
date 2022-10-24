@@ -11,8 +11,8 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.Post = require('./post')(sequelize,Sequelize);
-db.User = require('./user')(sequelize,Sequelize);
+db.Post = require('./post')(sequelize);
+db.User = require('./user')(sequelize);
 //모델 불러오기, 생성된 sequelize객체를 전달함, 모델에서는 해당 객체에 table 생성
 
 Object.keys(db).forEach((modelName) => {
