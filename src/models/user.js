@@ -1,6 +1,5 @@
-module.exports = (sequelize)=>{
+module.exports = (sequelize,DataTypes)=>{
 
-    const {DataTypes} = require('sequelize');
   
     const User = sequelize.define('User', {
       //테이블의 속성을 지정하는 항
@@ -17,6 +16,14 @@ module.exports = (sequelize)=>{
         type: DataTypes.STRING(100),
         allowNull: false, // 필수
       },
+      gender: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false, // 필수
+      },
+      age: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false, // 필수
+      },
     
     }, {
       freezeTableName: true,
@@ -24,7 +31,17 @@ module.exports = (sequelize)=>{
       collate:'utf8mb4_general_ci'
       // 모델의 추가 옵션들을 정할 수 있는 항
     });
-  
+
+    User.associate=(db)=>{
+
+      db.User.hasMany(db.Post);
+      db.User.hasMany(db.Comment);
+      db.User.belongsToMany(db.Post,{through:'Like',as:'Liked'});
+      db.User.belongsToMany(db.User,{through:'Follow',as:'Followers',foreignKey:'FollowingId'});
+      db.User.belongsToMany(db.User,{through:'Follow',as:'Followings',foreignKey:'FollowerId'});
+      
+      };
+
     return User;
    
   };
