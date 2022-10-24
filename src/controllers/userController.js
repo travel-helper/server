@@ -1,5 +1,4 @@
 const userService = require("../services/userService");
-// const baseResponse = require('../utilities/baseResponseStatus')
 
 const baseResponse = require("../utilities/baseResponseStatus");
 const { errResponse, response } = require("../utilities/response");
