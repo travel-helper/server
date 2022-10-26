@@ -8,12 +8,12 @@ const options = {
     },
     server: [
       {
-        url: "http://localhost:3000/docs", // url
+        url: "http://localhost:443/docs", // url
         description: "Local server", // name
       },
     ],
   },
   apis: ["./routers/*.js", "./controllers/*.js", "./swagger/swaggerDoc.js"],
 };
-const specs = swaggereJsdoc(options);
-module.exports = { swaggerUi, specs };
+
+module.exports = options;
