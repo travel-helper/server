@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-const dotenv = requite("dotenv");
+const dotenv = require("dotenv");
 const {sequelize} = require('./models');
 const postRouter = require('./routers/post.router')
 //const morgan = require("morgan");
@@ -9,14 +9,14 @@ const postRouter = require('./routers/post.router')
 
 dotenv.config();
 
-const cors = require("cors");
+
 const comression = require("compression");
 
 const app = express();
-const Router = require("./routers/router.js");
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsDoc = require("swagger-jsdoc");
-const options = require("../swagger/swaggerDoc");
+// const Router = require("./routers/router.js");
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerJsDoc = require("swagger-jsdoc");
+// const options = require("../swagger/swaggerDoc");
 
 
 

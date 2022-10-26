@@ -1,7 +1,9 @@
-const userController = require("../controllers/userController");
+const express =require('express')
+const userController =require('../controllers/userController')
 
-const userRouter = (router) => {
-  this.userController = new userController();
-};
+const router = express.Router()
 
-module.exports = userRouter;
+
+router.get('/',userController.loadPosts)
+
+module.exports= router
