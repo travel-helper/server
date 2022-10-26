@@ -6,19 +6,17 @@ const helmet = require("helmet");
 
 const { sequelize } = require("./models");
 const postRouter = require("./routers/post.router");
-
+const userRouter = require("./routers/user.router");
 //const morgan = require("morgan");
 //const cookieParser = require("cookie-parsers");
 
 dotenv.config();
 
 const app = express();
-// const Router = require("./routers/index.js");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const options = require("../swagger/swagger");
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +40,9 @@ const {
   DB_NAME,
   DB_PORT,
 } = process.env;
+
 app.use("/post", postRouter);
+app.use("/user", userRouter);
 
 sequelize
   .sync({ force: false })

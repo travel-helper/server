@@ -13,8 +13,6 @@ const sequelize = new Sequelize(
 );
 //config의 정보대로 시퀄라이즈와 mysql을 연결함
 
-
-
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

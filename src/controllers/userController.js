@@ -7,7 +7,6 @@ const regexDate = new RegExp(
 ); // YYYYMMDD 확인 정규표현식
 
 exports.loadUser = async function (req, res) {
-
   const result = await postUser.loadUser();
   return res.status(200).json(result);
 };

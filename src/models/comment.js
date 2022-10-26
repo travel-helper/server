@@ -1,28 +1,24 @@
-module.exports=(sequelize, DataTypes)=>{
+module.exports = (sequelize, DataTypes) => {
+  const Comment = sequelize.define(
+    "Comment",
 
-    const Comment = sequelize.define('Comment',
-    
-    {content:{
-
-        type:DataTypes.TEXT,
-        allowNull:false,
+    {
+      content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
     },
-    created_at: { 
-        type: DataTypes.DATE, 
-        allowNull: false, 
-        defaultValue: DataTypes.NOW, },
-    }
-    ,
-    
-    {charset:'utf8mb4',
-    collate:'utf8mb4_general_ci'});
-    
-    Comment.associate=(db)=>{
+    { charset: "utf8mb4", collate: "utf8mb4_general_ci" }
+  );
 
+  Comment.associate = (db) => {
     db.Comment.belongsTo(db.User);
     db.Comment.belongsTo(db.Post);
-
-    };
-    return Comment;
-    
-    };
+  };
+  return Comment;
+};
