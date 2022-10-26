@@ -13,7 +13,7 @@ const postRouter = require("./routers/post.router");
 dotenv.config();
 
 const app = express();
-const Router = require("./routers/index.js");
+// const Router = require("./routers/index.js");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");

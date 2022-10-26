@@ -13,9 +13,7 @@ const sequelize = new Sequelize(
 );
 //config의 정보대로 시퀄라이즈와 mysql을 연결함
 
-db.Comment = require("./comment")(sequelize, Sequelize);
-db.Hashtag = require("./hashtag")(sequelize, Sequelize);
-db.Image = require("./image")(sequelize, Sequelize);
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
