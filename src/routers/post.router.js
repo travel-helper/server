@@ -1,7 +1,9 @@
-const postController = require("../controllers/postController");
+const express =require('express')
+const postController =require('../controllers/postController')
 
-const postRouter = (router) => {
-  this.postController = new postController();
-};
+const router = express.Router()
 
-module.exports = postRouter;
+
+router.get('/',postController.loadPosts)
+
+module.exports= router

@@ -3,18 +3,22 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const comression = require("compression");
 const helmet = require("helmet");
+
 const { sequelize } = require("./models");
 const postRouter = require("./routers/post.router");
+
 //const morgan = require("morgan");
 //const cookieParser = require("cookie-parsers");
 
 dotenv.config();
+
 const app = express();
 const Router = require("./routers/index.js");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const options = require("../swagger/swagger");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

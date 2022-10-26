@@ -1,9 +1,10 @@
-const userController = require("../controllers/userController");
+const express =require('express')
+const userController =require('../controllers/userController')
 
-const userRouter = (router) => {
-  this.userController = new userController();
 
-  router.post("/auth/signup", this.userController.signup());
-};
+const router = express.Router()
 
-module.exports = userRouter;
+
+router.get('/',userController.loadPosts)
+
+module.exports= router
