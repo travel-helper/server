@@ -4,7 +4,7 @@ const cors = require("cors");
 const comression = require("compression");
 const helmet = require("helmet");
 
-const { sequelize } = require("./models");
+const { sequelize } = require("./repository");
 const postRouter = require("./routers/post.router");
 const userRouter = require("./routers/user.router");
 

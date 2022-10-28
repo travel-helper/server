@@ -16,13 +16,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: false, // 필수
       },
-      gender: {
+      phonenumber: {
         type: DataTypes.BOOLEAN,
         allowNull: false, // 필수
       },
-      age: {
+      birth: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false, // 필수
+      },
+      address: {
+        type: DataTypes.address,
+        allowNull: false,
       },
     },
     {

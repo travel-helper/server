@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../repository/user.repository");
 // const { Op } = require('sequelize');
 
 const baseResponse = require("../utilities/baseResponseStatus");
