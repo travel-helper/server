@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const { sequelize } = require("./models");
 const postRouter = require("./routers/post.router");
 const userRouter = require("./routers/user.router");
+
 //const morgan = require("morgan");
 //const cookieParser = require("cookie-parsers");
 
@@ -16,7 +17,8 @@ const app = express();
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
-const options = require("../swagger/swagger");
+
+const options = require("./swagger/swagger");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -59,6 +61,5 @@ app.get("/", (req, res) => {
 }); //실행확인용
 
 app.listen(SERVER_PORT, () => {
-  console.log(`${DB_USER}, ${DB_PASS}, ${DB_HOST}, ${DB_NAME}, ${DB_PASS}`);
   console.log(`서버실행중 : http://${SERVER_HOST}:${SERVER_PORT}`);
 });
