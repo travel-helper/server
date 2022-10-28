@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(30),
         allowNull: false, // 필수
         unique: true, // 고유한 값
+        validate: {
+          isEmail: true,
+        },
       },
       nickname: {
         type: DataTypes.STRING(30),
@@ -23,10 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       birth: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false, // 필수
-      },
-      address: {
-        type: DataTypes.address,
-        allowNull: false,
       },
     },
     {
