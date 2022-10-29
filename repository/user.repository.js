@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false, // 필수
       },
+      //address 추가 요
     },
     {
       freezeTableName: true,
