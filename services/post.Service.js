@@ -1,4 +1,4 @@
-const Post = require("../repository/post.repository");
+const Post = require("../model/post");
 // const { Op } = require('sequelize');
 
 const baseResponse = require("../utilities/baseResponseStatus");
