@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const { sequelize } = require("./repository");
 const postRouter = require("./routers/post.router");
 const userRouter = require("./routers/user.router");
+const passportConfig = require("./passport")
 
 //const morgan = require("morgan");
 //const cookieParser = require("cookie-parsers");
@@ -21,7 +22,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const options = require("./swagger/swagger");
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); // req.body를 사용하기 위한 세팅
 // app.use(compression());
 app.use(helmet());
 app.use(
@@ -45,6 +46,19 @@ const {
 
 app.use("/post", postRouter);
 app.use("/user", userRouter);
+
+
+app.use(cookieParser('travelH')); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
+
+app.use(session({
+
+saveUninitialized:false,
+resave:false,
+secret:'travelH',
+
+}));
+
+passportConfig(); //패스포트 설정 실행
 
 sequelize
   .sync({ force: false })
