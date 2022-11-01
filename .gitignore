@@ -1,4 +1,4 @@
-/src/.env
+.env
 /node_modules
 .DS_STORE
 /node_modules
