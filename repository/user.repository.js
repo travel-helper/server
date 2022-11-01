@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false, // 필수
       },
       address: {
-        type: DataTypes.address,
+        type: DataTypes.STRING(30), //이부분 DataTypes.address로 했더니 오류남
         allowNull: false,
       },
     },

@@ -4,13 +4,13 @@ const cors = require("cors");
 const comression = require("compression");
 const helmet = require("helmet");
 
-const { sequelize } = require("./repository");
-const postRouter = require("./routers/post.router");
-const userRouter = require("./routers/user.router");
+const { sequelize } = require("./repository/index.repository");
+// const postRouter = require("./routers/post.router");
+// const userRouter = require("./routers/user.router");
 const passportConfig = require("./passport")
 
-//const morgan = require("morgan");
-//const cookieParser = require("cookie-parsers");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parsers");
 
 dotenv.config();
 
@@ -44,8 +44,8 @@ const {
   DB_PORT,
 } = process.env;
 
-app.use("/post", postRouter);
-app.use("/user", userRouter);
+// app.use("/post", postRouter);
+// app.use("/user", userRouter);
 
 
 app.use(cookieParser('travelH')); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
