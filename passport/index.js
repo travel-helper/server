@@ -1,6 +1,6 @@
 const passport = require("passport");
 const local = require("./local");
-const { User } = require("../repository/index.repository");
+const { User } = require("../model/index");
 
 module.exports = () => {
   // 로그인 성공 시 쿠키와 id만 들고있는다.

@@ -4,12 +4,13 @@ const cors = require("cors");
 const comression = require("compression");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const { sequelize } = require("./model/index.repository");
+const { sequelize } = require("./model/index");
 const postRouter = require("./routers/post.router");
 const userRouter = require("./routers/user.router");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-//const passportConfig = require("./passport");
+const session = require("express-session")
+const passportConfig = require("./passport");
 
 dotenv.config();
 
@@ -60,9 +61,21 @@ const {
   DB_PORT,
 } = process.env;
 
-//router
-app.use("/post", postRouter);
-app.use("/user", userRouter);
+// app.use("/post", postRouter);
+// app.use("/user", userRouter);
+
+
+app.use(cookieParser('travelH')); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
+
+app.use(session({
+
+saveUninitialized:false,
+resave:false,
+secret:'travelH',
+
+}));
+
+passportConfig(); //패스포트 설정 실행
 
 app.get("/", (req, res) => {
   res.send("백엔드 서버 실행중");
