@@ -16,11 +16,11 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.Post = require("./post.repository")(sequelize, Sequelize);
-db.User = require("./user.repository")(sequelize, Sequelize);
-db.Comment = require("./comment.repository")(sequelize, Sequelize);
-db.Hashtag = require("./hashtag.repository")(sequelize, Sequelize);
-db.Image = require("./image.repository")(sequelize, Sequelize);
+db.Post = require("./post")(sequelize, Sequelize);
+db.User = require("./user")(sequelize, Sequelize);
+db.Comment = require("./comment")(sequelize, Sequelize);
+db.Hashtag = require("./hashtag")(sequelize, Sequelize);
+db.Image = require("./image")(sequelize, Sequelize);
 
 //모델 불러오기, 생성된 sequelize객체를 전달함, 모델에서는 해당 객체에 table 생성
 

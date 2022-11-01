@@ -1,48 +1,44 @@
-const passport =require('passport')
+const passport = require("passport");
+const bcrypt = require("bcrypt");
+// Strategy -> LocalStrategy로 이름 변경
+const { Strategy: LocalStrategy } = require("passport-local");
+const { User } = require("../model/user");
 
-const {Strategy:LocalStrategy} = require('passport-local');
-const { User } = require('../repository/user.repository')
-
-module.exports=()=>{
-
-
-passport.use(new LocalStrategy(
-    
-    {
-
-usernameField:"email",  
-passwordField:"password",}, //body로 전달된 email과 password
-
-
-
-async (email,password,done)=>{    //req.body의 email과 passwrod를 가져옴
-
-
-try{
-
-    const user = await User.findOne({where:{email}}) //이메일로 유저 찾기
-
-    if (!user){
-
-        return done(null,false,{reason:"존재하지 않는 사용자입니다."})
-    }
-
-    const result = await bcrypt.compare(password,user.password); // 유저의 암호화된 패스워드와 로그인 패스워드 비교
-
-    if (result){
-
-        return done(null,user); // 비밀번호 찾으면 done객체로 전달
-    }
-
-    return done(null,false,{reason:"비밀번호가 틀렸습니다."}) // 틀린 경우
-}catch(error){
-
-    console.error(error)
-    return done(error)
-}
-
-
-}));
-
-
-}
+// local 로그인 전략
+// done : 첫번째인자 - 서버 에러 / 두번째인자 - 응답 실패,성공 유무 / 세번째인자 - 실패 시 나타낼 문구(reason: XXXX);
+module.exports = () => {
+  passport.use(
+    new LocalStrategy(
+      {
+        usernameField: "email", // req.body.email 라고 명시적으로 알려줌 (정확한 명을 넣어야한다.)
+        passwordField: "password",
+      },
+      async (email, password, done) => {
+        // 함수가 추가된다.
+        try {
+          const user = await User.findOne({
+            // 로그인 시도에서 이메일 있는 조건으로 찾아보기.
+            where: { email },
+          });
+          if (!user) {
+            // passport에서는 res로 응답이 아닌, 우선 done으로 처리를 한다.
+            return done(null, false, { reason: "이메일이 일치하지 않습니다." });
+          }
+          // 비밀번호 비교 체크
+          // 첫번째 인자 password : 사용자가 입력한 비밀번호
+          // 두번째 인자 user.password : 실제 DB에 있는 비밀번호
+          const result = await bcrypt.compare(password, user.password);
+          if (result) {
+            // 비밀번호 일치할 경우
+            return done(null, user); // 두번째 user는 성공의 의미
+          }
+          // 비밀번호 일치하지 않을 경우
+          return done(null, false, { reason: "비밀번호가 일치하지 않습니다." });
+        } catch (err) {
+          console.error(err);
+          return done(err); // done의 첫번째 인자는 서버 에러시 넣는다.
+        }
+      }
+    )
+  );
+};
