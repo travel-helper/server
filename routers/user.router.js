@@ -10,4 +10,4 @@ router.post("/login", userController.login); // 로그인 컨트롤러
 
 module.exports = router;
 
-router.post("/signup", userController.signup);
+router.post("/signup", userController.signup); //회원가입 컨트롤러

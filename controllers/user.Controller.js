@@ -1,5 +1,5 @@
 const userService = require("../services/user.Service");
-
+const bcrypt = require("bcrypt");
 const baseResponse = require("../utilities/baseResponseStatus");
 const { errResponse, response } = require("../utilities/response");
 const regexDate = new RegExp(
@@ -41,20 +41,12 @@ exports.login = async function (req, res) {
 exports.signup = async function (req, res) {
   // POST /user/
   try {
-    const exUser = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
-    });
+    const exUser = await userService.exUser(req); //이메일 중복 확인
     if (exUser) {
       return res.status(403).send("이미 사용 중인 아이디입니다.");
     }
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
-    await User.create({
-      email: req.body.email,
-      nickname: req.body.nickname,
-      password: hashedPassword,
-    });
+    
+    await userService.createUser(req); //회원정보 기입
     res.status(201).send("ok");
   } catch (error) {
     console.error(error);
