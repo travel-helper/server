@@ -53,3 +53,9 @@ exports.signup = async function (req, res) {
     next(error); // status 500
   }
 };
+
+exports.logout = async function (req,res){  //로그아웃
+    req.logout();
+    req.session.destroy();
+    res.send('ok');
+}
