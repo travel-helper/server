@@ -17,6 +17,7 @@ exports.exUser=async function (req) { //이메일 중복 확인
     },
   })
 
+  return exUser
 };
 
 exports.createUser=async function (req) { //유저 생성
