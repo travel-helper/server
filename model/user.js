@@ -8,6 +8,16 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false, // 필수
         unique: true, // 고유한 값
       },
+      gender: {
+        type: DataTypes.STRING(30),
+        allowNull: false, // 필수
+        unique: true, // 고유한 값
+      },
+      age: {
+        type: DataTypes.STRING(30),
+        allowNull: false, // 필수
+        unique: true, // 고유한 값
+      },
       nickname: {
         type: DataTypes.STRING(30),
         allowNull: false, // 필수
@@ -16,15 +26,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: false, // 필수
       },
-      phonenumber: {
-        type: DataTypes.BOOLEAN,
+      address: {
+        type: DataTypes.STRING(100),
         allowNull: false, // 필수
       },
-      birth: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false, // 필수
-      },
-      //address 추가 요
+      // phonenumber: {
+      //   type: DataTypes.BOOLEAN,
+      //   allowNull: false, // 필수
+      // },
+      // birth: {
+      //   type: DataTypes.INTEGER.UNSIGNED,
+      //   allowNull: false, // 필수
+      // },
+     
     },
     {
       freezeTableName: true,
