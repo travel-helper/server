@@ -61,16 +61,15 @@ const {
 // app.use("/post", postRouter);
 app.use("/user", userRouter);
 
+app.use(cookieParser("travelH")); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
 
-app.use(cookieParser('travelH')); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
-
-app.use(session({
-
-saveUninitialized:false,
-resave:false,
-secret:'travelH',
-
-}));
+app.use(
+  session({
+    saveUninitialized: false,
+    resave: false,
+    secret: "travelH",
+  })
+);
 
 app.use(passport.initialize()); //passport 초기화
 app.use(passport.session()); //페이지 내에서 영구 로그인 설정 (변경 요)

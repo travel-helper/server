@@ -6,10 +6,10 @@ const router = express.Router();
 
 // router.get("/", userController.loadPosts);
 
-router.post("/login", userController.login); // 로그인 
+router.post("/login", userController.login); // 로그인
 
 module.exports = router;
 
-router.post("/signup", userController.signup); //회원가입 
+router.post("/signup", userController.signup); //회원가입
 
-router.post('/logout', userController.logout); //로그아웃
+router.post("/logout", userController.logout); //로그아웃

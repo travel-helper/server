@@ -48,7 +48,7 @@ exports.signup = async function (req, res) {
     if (exUser) {
       return res.status(403).send("이미 사용 중인 아이디입니다.");
     }
-    
+
     await userService.createUser(req); //회원정보 기입
     res.status(201).send("ok");
   } catch (error) {
@@ -57,8 +57,9 @@ exports.signup = async function (req, res) {
   }
 };
 
-exports.logout = async function (req,res){  //로그아웃
-    req.logout();
-    req.session.destroy();
-    res.send('ok');
-}
+exports.logout = async function (req, res) {
+  //로그아웃
+  req.logout();
+  req.session.destroy();
+  res.send("ok");
+};

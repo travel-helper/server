@@ -38,7 +38,6 @@ module.exports = (sequelize, DataTypes) => {
       //   type: DataTypes.INTEGER.UNSIGNED,
       //   allowNull: false, // 필수
       // },
-     
     },
     {
       freezeTableName: true,
