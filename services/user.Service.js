@@ -34,3 +34,27 @@ exports.createUser=async function (req) { //유저 생성
 
 };
 
+exports.fullUserWithoutPassword=async function (user) {  //관계데이터를 포함한 유저 정보를 반환함 (패스워드 제외)
+
+const fullUserWithoutPassword = await User.findOne({
+
+  where: { id: user.id },
+  attributes: {
+    exclude: ['password'] //패스워드 제외
+  },
+  // include: [{
+  //   model: Post,
+  //   attributes: ['id'],
+  // }, {
+  //   model: User,
+  //   as: 'Followings',
+  //   attributes: ['id'], //관계형 데이터 포함
+  // }, {
+  //   model: User,
+  //   as: 'Followers',
+  //   attributes: ['id'],
+  // }]
+})
+
+return fullUserWithoutPassword;
+};

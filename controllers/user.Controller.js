@@ -19,7 +19,7 @@ exports.login = async function (req, res) {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       console.error(err);
-      next(err);
+      // next(err);
     }
 
     if (info) {
@@ -32,10 +32,11 @@ exports.login = async function (req, res) {
       // if (loginErr) {
       //   return next(loginErr);
       // }
+      const fullUser = await userService.fullUserWithoutPassword(user);
 
-      return res.json(user);
+      return res.json(fullUser);
     });
-  })(req, res, nest);
+  })(req, res);
 };
 
 exports.signup = async function (req, res) {
