@@ -2,7 +2,7 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 // Strategy -> LocalStrategy로 이름 변경
 const { Strategy: LocalStrategy } = require("passport-local");
-const { User } = require("../model/user");
+const { User } = require("../model");
 
 // local 로그인 전략
 // done : 첫번째인자 - 서버 에러 / 두번째인자 - 응답 실패,성공 유무 / 세번째인자 - 실패 시 나타낼 문구(reason: XXXX);
