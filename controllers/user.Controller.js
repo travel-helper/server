@@ -29,9 +29,9 @@ exports.login = async function (req, res) {
     return req.login(user, async (loginErr) => {
       // passport index.js 실행
 
-      if (loginErr) {
-        return next(loginErr);
-      }
+      // if (loginErr) {
+      //   return next(loginErr);
+      // }
 
       return res.json(user);
     });
@@ -40,6 +40,8 @@ exports.login = async function (req, res) {
 
 exports.signup = async function (req, res) {
   // POST /user/
+  console.log("회원가입요청");
+  console.log(req.body);
   try {
     const exUser = await userService.exUser(req); //이메일 중복 확인
     if (exUser) {
@@ -50,7 +52,7 @@ exports.signup = async function (req, res) {
     res.status(201).send("ok");
   } catch (error) {
     console.error(error);
-    next(error); // status 500
+    // next(error); // status 500
   }
 };
 
