@@ -13,7 +13,16 @@ const session = require("express-session");
 const passportConfig = require("./passport");
 
 dotenv.config();
-
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log("데이터베이스 연결됨.");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+//mysql와 sequelize 동기화
+passportConfig(); //패스포트 설정 실행
 const app = express();
 
 const swaggerUi = require("swagger-ui-express");
@@ -38,16 +47,6 @@ app.use(
 app.use(cookieParser(process.env.COOKIE_SECRET)); //cookieparser에 비밀키 설정
 app.use(morgan("dev")); //개발모드로 로깅
 
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log("데이터베이스 연결됨.");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-//mysql와 sequelize 동기화
-
 const {
   SERVER_HOST,
   SERVER_PORT,
@@ -57,9 +56,6 @@ const {
   DB_NAME,
   DB_PORT,
 } = process.env;
-
-// app.use("/post", postRouter);
-app.use("/user", userRouter);
 
 app.use(cookieParser("travelH")); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
 
@@ -74,22 +70,23 @@ app.use(
 app.use(passport.initialize()); //passport 초기화
 app.use(passport.session()); //페이지 내에서 영구 로그인 설정 (변경 요)
 
-passportConfig(); //패스포트 설정 실행
-
 app.get("/", (req, res) => {
   res.send("백엔드 서버 실행중");
 }); //실행확인용
 
 //404 처리
-app.use((req, res, next) => {
-  console.log("404 Error");
-  res.status(404).send("Not Found");
-});
+// app.use((req, res, next) => {
+//   console.log("404 Error");
+//   res.status(404).send("Not Found");
+// });
 
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(err.status || 500).send(err.message);
-});
+// app.use((err, req, res, next) => {
+//   console.error(err);
+//   res.status(err.status || 500).send(err.message);
+// });
+
+// app.use("/post", postRouter);
+app.use("/user", userRouter);
 
 app.listen(SERVER_PORT, () => {
   console.log(`서버실행중 : http://${SERVER_HOST}:${SERVER_PORT}`);
