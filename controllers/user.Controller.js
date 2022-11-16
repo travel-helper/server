@@ -27,7 +27,7 @@ exports.login = async function (req, res, next) {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       console.error(err);
-      // next(err);
+      next(err);
     }
 
     if (info) {
@@ -37,9 +37,9 @@ exports.login = async function (req, res, next) {
     return req.login(user, async (loginErr) => {
       // passport index.js 실행
 
-      // if (loginErr) {
-      //   return next(loginErr);
-      // }
+      if (loginErr) {
+        return next(loginErr);
+      }
       const fullUser = await userService.fullUserWithoutPassword(user);
 
       return res.status(200).json(fullUser);
