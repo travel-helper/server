@@ -6,14 +6,22 @@ const regexDate = new RegExp(
   /(^(19|20)\d{2})(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/
 ); // YYYYMMDD 확인 정규표현식
 
-exports.loadUsers = async function (req, res) {
-  const result = await userService.loadUser();
-  return res.status(200).json(result);
+exports.loadUsers = async function (req, res, next) {
+  try {
+    if (req.user) {
+      const fullUser = await userService.fullUserWithoutPassword(user);
+
+      return res.status(200).json(fullUser);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 };
 
 const passport = require("passport");
 
-exports.login = async function (req, res) {
+exports.login = async function (req, res, next) {
   // 패스포트를 활용한 로그인 컨트롤러(서비스는 패스포트 내에 존재함)
 
   passport.authenticate("local", (err, user, info) => {
@@ -34,12 +42,12 @@ exports.login = async function (req, res) {
       // }
       const fullUser = await userService.fullUserWithoutPassword(user);
 
-      return res.json(fullUser);
+      return res.status(200).json(fullUser);
     });
-  })(req, res);
+  })(req, res, next);
 };
 
-exports.signup = async function (req, res) {
+exports.signup = async function (req, res, next) {
   // POST /user/
   console.log("회원가입요청");
   console.log(req.body);
@@ -53,7 +61,7 @@ exports.signup = async function (req, res) {
     res.status(201).send("ok");
   } catch (error) {
     console.error(error);
-    // next(error); // status 500
+    next(error); // status 500
   }
 };
 

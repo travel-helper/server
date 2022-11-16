@@ -4,9 +4,11 @@ const userController = require("../controllers/user.Controller");
 
 const router = express.Router();
 
-// router.get("/", userController.loadPosts);
+const { isLogedIn, isNotLogedIn } = require("../middlewares/loginCheck");
 
-router.post("/login", userController.login); // 로그인
+router.get("/", isLogedIn, userController.loadPosts);
+
+router.post("/login", isNotLogedIn, userController.login); // 로그인(로그인 상태가 아닌 경우에만)
 
 module.exports = router;
 
