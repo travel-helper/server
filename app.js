@@ -55,7 +55,7 @@ const {
   DB_HOST,
   DB_NAME,
   DB_PORT,
-  $PORT,
+  PORT,
 } = process.env;
 
 app.use(cookieParser("travelH")); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
@@ -91,6 +91,6 @@ app.use("/user", userRouter);
 
 app.listen(process.env.$PORT, () => {
   console.log(
-    `서버실행중 : http://${process.env.SERVER_HOST}:${process.env.$PORT}`
+    `서버실행중 : http://${process.env.SERVER_HOST}:${process.env.PORT}`
   );
 });
