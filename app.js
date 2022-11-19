@@ -55,7 +55,7 @@ const {
   DB_HOST,
   DB_NAME,
   DB_PORT,
-  PORT,
+  PORT, //railway에서는 .env파일에 PORT부분을 자동으로 기입해준다.
 } = process.env;
 
 app.use(cookieParser("travelH")); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
@@ -89,8 +89,6 @@ app.get("/", (req, res) => {
 // app.use("/post", postRouter);
 app.use("/user", userRouter);
 
-app.listen(process.env.$PORT, () => {
-  console.log(
-    `서버실행중 : http://${process.env.SERVER_HOST}:${process.env.PORT}`
-  );
+app.listen(PORT, () => {
+  console.log(`서버실행중 : http://${SERVER_HOST}:${PORT}`);
 });
