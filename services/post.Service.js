@@ -1,4 +1,4 @@
-const { Post, Hashtag } = require("../model");
+const { Post, Hashtag, Image, Comment } = require("../model");
 // const { Op } = require('sequelize');
 
 const baseResponse = require("../utilities/baseResponseStatus");
@@ -34,4 +34,43 @@ exports.addHashtag = async function (hashtags, post) {
   );
   await post.addHashtags(result.map((v) => v[0])); //반환된 fulfilled객체의 name(해시태그)를=> v ([name,true])
   //인자로 받은 post에 hashtahg들을 대응시켜 관계 테이블에 저장
+};
+
+exports.addImage = async function (req, post) {
+  const image = await Image.create({ src: req.body.image }); //이미지 url 테이블에 저장, 기입한 url을 반환받음
+  await post.addImages(image); //post - image 관계 테이블에 매핑
+};
+
+exports.getPost = async function (post) {
+  const post = await Post.findOne({
+    where: { id: post.id }, //기본 반환 값은 content
+
+    // include: [
+    //   //관계데이터 포함
+    //   {
+    //     model: Image, //게시글과 매핑된
+    //     //이미지
+    //   },
+    //   {
+    //     model: Comment, //댓글
+    //     include: [
+    //       {
+    //         model: User, //작성자
+    //         attributes: ["id", "nickname"], //의 아이디와 닉네임
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     model: User, //작성자
+    //     attributes: ["id", "nickname"], //의 아이디와 닉네임
+    //   },
+    //   {
+    //     model: User, //좋아요 누른 사람
+    //     as: "Likers",
+    //     attributes: ["id"], //의 아이디
+    //   },
+    // ],
+  });
+
+  return post;
 };
