@@ -22,7 +22,7 @@ exports.addPost = async (req, res, next) => {
     if (req.body.image) {
       await postService.addImage(req, post); //게시글 이미지 매핑
     }
-    const fullPost = await postService.getPost(post); //조인된 post 반환
+    const fullPost = await postService.getFullPost(post); //조인된 post 반환
 
     res.status(201).json(fullPost);
   } catch (error) {

@@ -41,8 +41,8 @@ exports.addImage = async function (req, post) {
   await post.addImages(image); //post - image 관계 테이블에 매핑
 };
 
-exports.getPost = async function (post) {
-  const post = await Post.findOne({
+exports.getFullPost = async function (post) {
+  const fullpost = await Post.findOne({
     where: { id: post.id }, //기본 반환 값은 content
 
     // include: [
@@ -72,5 +72,5 @@ exports.getPost = async function (post) {
     // ],
   });
 
-  return post;
+  return fullpost;
 };
