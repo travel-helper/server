@@ -12,7 +12,7 @@ const development = {
 const production = {
   username: env.DB_USER,
   password: env.DB_PASS,
-  database: "TraveHP",
+  database: "Travel",
   host: env.DB_HOST,
   dialect: "mysql",
 };
