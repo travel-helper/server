@@ -38,11 +38,10 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(compression());
 app.use(helmet());
 app.use(
-  cors()
-  // {
-  // origin:'*',
-  // credentials:true,
-  // }
+  cors({
+    origin: "*",
+    credentials: true,
+  })
 ); //허용 도메인 설정
 app.use(cookieParser(process.env.COOKIE_SECRET)); //cookieparser에 비밀키 설정
 app.use(morgan("dev")); //개발모드로 로깅
