@@ -49,12 +49,13 @@ app.use(morgan("dev")); //개발모드로 로깅
 
 const {
   SERVER_HOST,
-  SERVER_PORT,
+  // SERVER_PORT,
   DB_USER,
   DB_PASS,
   DB_HOST,
   DB_NAME,
   DB_PORT,
+  $PORT,
 } = process.env;
 
 app.use(cookieParser("travelH")); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
@@ -88,6 +89,6 @@ app.get("/", (req, res) => {
 // app.use("/post", postRouter);
 app.use("/user", userRouter);
 
-app.listen(SERVER_PORT, () => {
-  console.log(`서버실행중 : http://${SERVER_HOST}:${SERVER_PORT}`);
+app.listen($PORT, () => {
+  console.log(`서버실행중 : http://${SERVER_HOST}:${$PORT}`);
 });
