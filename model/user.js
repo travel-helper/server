@@ -11,12 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       gender: {
         type: DataTypes.STRING(30),
         allowNull: false, // 필수
-        unique: true, // 고유한 값
       },
       age: {
         type: DataTypes.STRING(30),
         allowNull: false, // 필수
-        unique: true, // 고유한 값
       },
       nickname: {
         type: DataTypes.STRING(30),
