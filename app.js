@@ -89,6 +89,8 @@ app.get("/", (req, res) => {
 // app.use("/post", postRouter);
 app.use("/user", userRouter);
 
-app.listen($PORT, () => {
-  console.log(`서버실행중 : http://${SERVER_HOST}:${$PORT}`);
+app.listen(process.env.$PORT, () => {
+  console.log(
+    `서버실행중 : http://${process.env.SERVER_HOST}:${process.env.$PORT}`
+  );
 });
