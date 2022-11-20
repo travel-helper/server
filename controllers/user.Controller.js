@@ -67,9 +67,12 @@ exports.signup = async function (req, res, next) {
   }
 };
 
-exports.logout = async function (req, res) {
+exports.logout = async function (req, res, next) {
   //로그아웃
-  req.logout();
-  req.session.destroy();
-  res.send("ok");
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
 };
