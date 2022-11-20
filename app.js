@@ -39,16 +39,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(
   cors({
-    origin: "https://lucky-kelpie-033294.netlify.app",
+    // origin: "https://lucky-kelpie-033294.netlify.app",
+    origin: "http://localhost:4043",
     credentials: true,
   })
 ); //허용 도메인 설정
-app.use(cookieParser(process.env.COOKIE_SECRET)); //cookieparser에 비밀키 설정
+app.use(cookieParser("travelH")); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
 app.use(morgan("dev")); //개발모드로 로깅
 
 const {
   SERVER_HOST,
-  // SERVER_PORT,
+  SERVER_PORT,
   DB_USER,
   DB_PASS,
   DB_HOST,
@@ -57,13 +58,15 @@ const {
   PORT, //railway에서는 .env파일에 PORT부분을 자동으로 기입해준다.
 } = process.env;
 
-app.use(cookieParser("travelH")); // 키 코드로 쿠기 생성 -> 추후 dotenv로 키값을 옮길 예정
-
 app.use(
   session({
     saveUninitialized: false,
     resave: false,
     secret: "travelH",
+    cookie: {
+      secure: false,
+      sameSite: "Lax",
+    },
   })
 );
 
@@ -88,6 +91,6 @@ app.get("/", (req, res) => {
 // app.use("/post", postRouter);
 app.use("/user", userRouter);
 
-app.listen(PORT, () => {
-  console.log(`서버실행중 : http://${SERVER_HOST}:${PORT}`);
+app.listen(PORT ?? SERVER_PORT, () => {
+  console.log(`서버실행중 : http://${SERVER_HOST}:${PORT ?? SERVER_PORT}`);
 });
