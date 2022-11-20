@@ -9,7 +9,7 @@ const regexDate = new RegExp(
 exports.loadUsers = async function (req, res, next) {
   try {
     if (req.user) {
-      const fullUser = await userService.fullUserWithoutPassword(user);
+      const fullUser = await userService.fullUserWithoutPassword(req.user);
 
       return res.status(200).json(fullUser);
     }
