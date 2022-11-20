@@ -27,6 +27,7 @@ exports.createUser = async function (req) {
   await User.create({
     email: req.body.email,
     nickname: req.body.nickname,
+    birth: req.body.birth,
     password: hashedPassword,
     gender: req.body.gender,
     age: req.body.age,
