@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(
   cors({
-    origin: "https://hilarious-creponne-542e03.netlify.app",
+    origin: "https://lucky-kelpie-033294.netlify.app",
     credentials: true,
   })
 ); //허용 도메인 설정
