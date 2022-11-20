@@ -6,20 +6,22 @@ const regexDate = new RegExp(
   /(^(19|20)\d{2})(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/
 ); // YYYYMMDD 확인 정규표현식
 
+const passport = require("passport");
+
 exports.loadUsers = async function (req, res, next) {
   try {
     if (req.user) {
       const fullUser = await userService.fullUserWithoutPassword(req.user);
 
       return res.status(200).json(fullUser);
+    } else {
+      return res.status(200).json(null);
     }
   } catch (error) {
     console.error(error);
     next(error);
   }
 };
-
-const passport = require("passport");
 
 exports.login = async function (req, res, next) {
   // 패스포트를 활용한 로그인 컨트롤러(서비스는 패스포트 내에 존재함)
