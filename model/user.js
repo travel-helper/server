@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(30),
         allowNull: false, // 필수
       },
-      age: {
+      birth: {
         type: DataTypes.STRING(30),
         allowNull: false, // 필수
       },
