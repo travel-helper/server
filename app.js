@@ -65,8 +65,8 @@ app.use(
     secret: "travelH",
     cookie: {
       httpOnly: false,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "none",
     },
   })
 );
