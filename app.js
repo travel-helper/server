@@ -39,8 +39,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(
   cors({
-    // origin: "https://lucky-kelpie-033294.netlify.app",
-    origin: "http://localhost:4043",
+    origin: "https://lucky-kelpie-033294.netlify.app",
+    // origin: "http://localhost:4043",
     credentials: true,
   })
 ); //허용 도메인 설정
