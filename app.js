@@ -64,6 +64,7 @@ app.use(
     resave: false,
     secret: "travelH",
     cookie: {
+      httpOnly: false,
       secure: false,
       sameSite: "Lax",
     },
