@@ -12,8 +12,8 @@ const helmet = require("helmet");
 const comression = require("compression");
 const { sequelize } = require("./model/index");
 
-const postRouter = require("./routers/post.router");
-const userRouter = require("./routers/user.router");
+const postRouter = require("./routers/post");
+const userRouter = require("./routers/user");
 const passportConfig = require("./passport");
 
 dotenv.config();
@@ -44,7 +44,7 @@ app.use(helmet());
 app.use(
   cors({
     // origin: "https://lucky-kelpie-033294.netlify.app",
-    origin: "http://localhost:4043",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 ); //허용 도메인 설정
@@ -68,7 +68,7 @@ app.use(
     resave: false,
     secret: "travelH",
     cookie: {
-      httpOnly: false,
+      httpOnly: true,
       secure: false,
       sameSite: "lax",
     },
@@ -93,7 +93,7 @@ app.get("/", (req, res) => {
 //   res.status(err.status || 500).send(err.message);
 // });
 
-// app.use("/post", postRouter);
+app.use("/post", postRouter);
 app.use("/user", userRouter);
 
 app.listen(PORT ?? SERVER_PORT, () => {
