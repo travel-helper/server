@@ -33,6 +33,7 @@ exports.addHashtag = async function (hashtags, post) {
       })
     )
   );
+
   await post.addHashtags(result.map((v) => v[0])); //반환된 fulfilled객체의 name(해시태그)를=> v ([name,true])
   //인자로 받은 post에 hashtahg들을 대응시켜 관계 테이블에 저장
 };
