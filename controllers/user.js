@@ -1,4 +1,4 @@
-const userService = require("../services/user.Service");
+const userService = require("../services/user");
 const bcrypt = require("bcrypt");
 const baseResponse = require("../utilities/baseResponseStatus");
 const { errResponse, response } = require("../utilities/response");

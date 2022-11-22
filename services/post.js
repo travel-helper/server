@@ -15,6 +15,7 @@ exports.loadPosts = async function (lastId) {
 exports.addContent = async function (req) {
   // post테이블에 content와 id를 저장
   const post = await Post.create({
+    title: req.body.title,
     content: req.body.content,
     UserId: req.user.id,
   });
