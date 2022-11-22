@@ -5,7 +5,7 @@ const { errResponse, response } = require("../utilities/response");
 const regexDate = new RegExp(
   /(^(19|20)\d{2})(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/
 ); // YYYYMMDD 확인 정규표현식
-
+const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 exports.loadUsers = async function (req, res, next) {
@@ -26,6 +26,8 @@ exports.loadUsers = async function (req, res, next) {
 exports.login = async function (req, res, next) {
   // 패스포트를 활용한 로그인 컨트롤러(서비스는 패스포트 내에 존재함)
 
+  // passport.authenticate("jwt", { session: false })(req, res, next);
+
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       console.error(err);
@@ -43,8 +45,10 @@ exports.login = async function (req, res, next) {
         return next(loginErr);
       }
       const fullUser = await userService.fullUserWithoutPassword(user);
-
-      return res.status(200).json(fullUser);
+      // console.log(fullUser.dataValues);
+      const token = jwt.sign(fullUser.dataValues, "jwt-secret-key");
+      return res.status(200).json(token);
+      // return res.status(200).json(fullUser);
     });
   })(req, res, next);
 };
@@ -73,6 +77,6 @@ exports.logout = async function (req, res, next) {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+    return res.send("ok");
   });
 };
