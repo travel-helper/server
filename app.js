@@ -1,15 +1,19 @@
 const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const comression = require("compression");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const { sequelize } = require("./model/index");
-const postRouter = require("./routers/post.router");
-const userRouter = require("./routers/user.router");
 const cookieParser = require("cookie-parser");
+const morgan = require("morgan");
+const path = require("path");
 const passport = require("passport");
 const session = require("express-session");
+const nunjucks = require("nunjucks");
+const dotenv = require("dotenv");
+
+const cors = require("cors");
+const helmet = require("helmet");
+const comression = require("compression");
+const { sequelize } = require("./model/index");
+
+const postRouter = require("./routers/post.router");
+const userRouter = require("./routers/user.router");
 const passportConfig = require("./passport");
 
 dotenv.config();
