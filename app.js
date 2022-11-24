@@ -70,8 +70,8 @@ app.use(
     secret: "travelH",
     cookie: {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
     },
   })
 );
