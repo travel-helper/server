@@ -3,7 +3,7 @@ const postController = require("../controllers/post");
 
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require("../middlewares/loginCheck");
-const { jwtMiddleware } = require("../middlewares/jwt.middleware");
+const { isJWT,isNotJWT } = require("../middlewares/jwt.middleware");
 router.get("/", postController.loadPosts);
 router.post("/", isLoggedIn, postController.addPost);
 router.post("/img", isLoggedIn, postController.addImg);

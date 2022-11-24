@@ -4,7 +4,7 @@ dotenv.config();
 const { response, errResponse } = require("../utilities/response");
 const baseResponse = require("../utilities/baseResponseStatus");
 
-const jwtMiddleware = (req, res, next) => {
+exports.isJWT = (req, res, next) => {
   console.log("헤더확인");
   console.log(req.headers["authorization"]);
   let accessToken =
@@ -63,4 +63,14 @@ const jwtMiddleware = (req, res, next) => {
   }).catch(onError);
 };
 
-module.exports = jwtMiddleware;
+exports.isNotJWT = (req, res, next) => {
+  console.log("헤더확인");
+  console.log(req.headers["authorization"]);
+  let accessToken =
+    req.headers["x-access-token"] || req.headers["authorization"];
+  if (!accessToken) {
+    //토큰이 없는 경우
+    next();
+  }
+  return res.status(401).send("로그인 하지 않은 사용자만 접근 가능합니다. ");
+};
