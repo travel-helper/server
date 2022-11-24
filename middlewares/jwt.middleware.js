@@ -25,7 +25,7 @@ const jwtMiddleware = (req, res, next) => {
 
   //토큰 검증
   const p = new Promise((resolve, reject) => {
-    jwt.verify(token, process.env.JWT_SECRET, (error, verifiedToken) => {
+    jwt.verify(token, "jwt-secret-key", (error, verifiedToken) => {
       if (error) {
         console.log("유효하지 않은 토큰입니다.");
         console.log(error);
