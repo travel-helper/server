@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
   Post.associate = (db) => {
     //테이블간 관계 설정
 
-    // belongsTo 1:1
+    // belongsTo 1:1 다른 테이블의 정보가 들어갈 떄 belongsTo
     // hasMany 현재 테이블이 해당 테이블의 행을 여럿 가질 수 있음 1:n
     // belongsToMany 해당 테이블이 현재 테이블의 행을 여럿 가질 수 있음, 해당 테이블에서도 마찬가지임 n:n
 
