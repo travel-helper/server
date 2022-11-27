@@ -4,7 +4,7 @@ const multer = require("multer");
 const path = require("path");
 
 const router = express.Router();
-const { isLoggedIn, isNotLoggedIn } = require("../middlewares/loginCheck");
+
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -18,6 +18,9 @@ const upload = multer({
   }),
   limits: { fileSize: 5 * 1024 * 1024 },
 });
+
+
+const { isJWT,isNotJWT } = require("../middlewares/jwt.middleware");
 
 router.get("/", postController.loadPosts);
 router.post("/", postController.addPost);
