@@ -20,6 +20,6 @@ const upload = multer({
 });
 
 router.get("/", postController.loadPosts);
-router.post("/", isLoggedIn, postController.addPost);
-router.post("/img", isLoggedIn, upload.single("qwe"), postController.addImg);
+router.post("/", postController.addPost);
+router.post("/img", upload.single("img"), postController.addImg);
 module.exports = router;
