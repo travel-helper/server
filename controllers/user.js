@@ -13,7 +13,8 @@ exports.loadUsers = async function (req, res, next) {
     if (req.user) {
       const fullUser = await userService.fullUserWithoutPassword(req.user);
 
-      return res.status(200).json(fullUser);
+      const token = jwt.sign(fullUser.dataValues, "jwt-secret-key");
+      return res.status(200).json(token);
     } else {
       return res.status(200).json(null);
     }
