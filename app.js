@@ -52,9 +52,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(
   cors({
-    origin: "https://lucky-kelpie-033294.netlify.app",
+    // origin: "https://lucky-kelpie-033294.netlify.app",
     // origin: "http://localhost:3000",
-    // origin: "http://localhost:4043",
+    origin: "http://localhost:4043",
     credentials: true,
   })
 ); //허용 도메인 설정
@@ -79,8 +79,10 @@ app.use(
     secret: "travelH",
     cookie: {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      // secure: true,
+      // sameSite: "none",
+      secure: false,
+      sameSite: "lax",
     },
   })
 );

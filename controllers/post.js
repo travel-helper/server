@@ -16,7 +16,7 @@ exports.addPost = async (req, res, next) => {
   try {
     const hashtags = req.body.content.match(/#[^\s#]+/g); //해시태그 추출
 
-    const post = await postService.addContent(); //게시글 text 저장
+    const post = await postService.addContent(req); //게시글 text 저장
 
     if (hashtags) {
       await postService.addHashtag(hashtags, post); //게시글 해시태그 매핑

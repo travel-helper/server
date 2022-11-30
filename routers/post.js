@@ -5,7 +5,6 @@ const path = require("path");
 
 const router = express.Router();
 
-
 const upload = multer({
   storage: multer.diskStorage({
     destination(req, file, cb) {
@@ -19,8 +18,7 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-
-const { isJWT,isNotJWT } = require("../middlewares/jwt.middleware");
+const { isJWT, isNotJWT } = require("../middlewares/jwt.middleware");
 
 router.get("/", postController.loadPosts);
 router.post("/", postController.addPost);

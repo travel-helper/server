@@ -1,4 +1,4 @@
-const { Post, Hashtag, Image, Comment } = require("../model");
+const { Post, User, Hashtag, Image, Comment } = require("../model");
 // const { Op } = require('sequelize');
 
 const baseResponse = require("../utilities/baseResponseStatus");
@@ -17,7 +17,8 @@ exports.addContent = async function (req) {
   const post = await Post.create({
     title: req.body.title,
     content: req.body.content,
-    UserId: req.user.id,
+    // UserId: req.user.id,
+    UserId: req.body.id,
   });
 
   return post;
