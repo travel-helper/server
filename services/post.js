@@ -77,3 +77,25 @@ exports.getFullPost = async function (post) {
 
   return fullpost;
 };
+
+exports.addComment = async function (req) {
+  const comment = await Comment.create({
+    content: req.body.content,
+    PostId: parseInt(req.params.postId, 10),
+    UserId: req.user.id,
+  });
+  return comment;
+};
+exports.getFullComment = async function (req) {
+  const fullComment = await Comment.findOne({
+    where: { id: comment.id },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "nickname"],
+      },
+    ],
+  });
+
+  return fullComment;
+};

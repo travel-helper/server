@@ -23,4 +23,9 @@ const { isJWT, isNotJWT } = require("../middlewares/jwt.middleware");
 router.get("/", postController.loadPosts);
 router.post("/", postController.addPost);
 router.post("/img", upload.single("img"), postController.addImg);
+router.post("/:id/comment", postController.addComment);
+
+router.patch("/");
+router.delete("/");
+
 module.exports = router;
