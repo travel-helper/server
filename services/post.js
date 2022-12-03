@@ -77,7 +77,15 @@ exports.getFullPost = async function (post) {
   return fullpost;
 };
 
-exports.addComment = async function (req) {
+exports.findPost = async function (req) {
+  const post = await Post.findOne({
+    where: { id: req.params.postId },
+  });
+
+  return post;
+};
+
+exports.addComment = async function (req, res) {
   const comment = await Comment.create({
     content: req.body.content,
     PostId: parseInt(req.params.postId, 10),
@@ -119,4 +127,12 @@ exports.deletePost = async function (req) {
       UserId: req.body.userId,
     },
   });
+};
+
+exports.like = async function (post) {
+  await post.addLikers(req.user.id);
+};
+
+exports.unlike = async function (post) {
+  await post.removeLikers(req.user.id);
 };

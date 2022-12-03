@@ -66,9 +66,7 @@ exports.deletePost = async (req, res, next) => {
 
 exports.addComment = async (req, res, next) => {
   try {
-    const post = await Post.findOne({
-      where: { id: req.params.postId },
-    });
+    const post = postService.findPost(req);
     if (!post) {
       return res.status(403).send("존재하지 않는 게시글입니다.");
     }
@@ -81,3 +79,31 @@ exports.addComment = async (req, res, next) => {
     next(error);
   }
 };
+
+// exports.like = async (req, res, next) => {
+//   try {
+//     const post = postService.findPost(req);
+//     if (!post) {
+//       return res.status(403).send("게시글이 존재하지 않습니다.");
+//     }
+//     postService.like(post, req);
+//     res.json({ PostId: post.id, UserId: req.user.id });
+//   } catch (error) {
+//     console.error(error);
+//     next(error);
+//   }
+// };
+
+// exports.unlike = async (req, res, next) => {
+//   try {
+//     const post = postService.findPost(req);
+//     if (!post) {
+//       return res.status(403).send("게시글이 존재하지 않습니다.");
+//     }
+//     postService.unlike(pos, req);
+//     res.json({ PostId: post.id, UserId: req.user.id });
+//   } catch (error) {
+//     console.error(error);
+//     next(error);
+//   }
+// };
