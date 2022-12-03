@@ -73,10 +73,9 @@ exports.addComment = async (req, res, next) => {
       return res.status(403).send("존재하지 않는 게시글입니다.");
     }
 
-    const comment = await postService.addComment(req);
-    const fullComment = await postService.getFullComment(comment);
+    const createdComment = await postService.addComment(req);
 
-    res.status(201).json(fullComment);
+    res.status(201).json(createdComment);
   } catch (error) {
     console.error(error);
     next(error);

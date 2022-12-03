@@ -78,14 +78,12 @@ exports.getFullPost = async function (post) {
 };
 
 exports.addComment = async function (req) {
-  const createdComment = await Comment.create({
+  const comment = await Comment.create({
     content: req.body.content,
     PostId: parseInt(req.params.postId, 10),
-    UserId: req.user.id,
+    UserId: req.body.id, //수정 요 >req.user.id
   });
-  return createdComment;
-};
-exports.getFullComment = async function (req) {
+
   const fullComment = await Comment.findOne({
     where: { id: comment.id },
     include: [
