@@ -14,8 +14,8 @@ const { sequelize } = require("./model/index");
 
 const postRouter = require("./routers/post");
 const userRouter = require("./routers/user");
-const pageRouter = require("./routers/page");
-const tagRouter = require("./routers/hashtag");
+// const pageRouter = require("./routers/page");
+// const tagRouter = require("./routers/hashtag");
 const passportConfig = require("./passport");
 
 const fs = require("fs");
@@ -105,8 +105,8 @@ app.get("/", (req, res) => {
 
 app.use("/post", postRouter);
 app.use("/user", userRouter);
-app.use("/page", pageRouter);
-app.use("/hashtag", tagRouter);
+// app.use("/page", pageRouter);
+// app.use("/hashtag", tagRouter);
 
 app.listen(PORT ?? SERVER_PORT, () => {
   console.log(`서버실행중 : http://${SERVER_HOST}:${PORT ?? SERVER_PORT}`);

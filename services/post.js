@@ -18,7 +18,7 @@ exports.addContent = async function (req) {
     title: req.body.title,
     content: req.body.content,
     // UserId: req.user.id,
-    UserId: req.body.id,
+    UserId: req.body.id, //수정 요 >req.user.id
   });
 
   return post;
