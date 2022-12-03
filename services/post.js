@@ -14,11 +14,17 @@ exports.loadPosts = async function (lastId) {
 
 exports.addContent = async function (req) {
   // post테이블에 content와 id를 저장
+
   const post = await Post.create({
     title: req.body.title,
     content: req.body.content,
-    // UserId: req.user.id,
-    UserId: req.body.id, //수정 요 >req.user.id
+    tema: req.body.tema,
+    region: req.body.region,
+    thumbnail: req.body.thumbnail,
+    // price:req.body.price,
+    UserId: req.user.dataValues.id,
+
+    // UserId: req.body.id, //수정 요 >req.user.id
   });
 
   return post;
