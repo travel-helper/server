@@ -14,6 +14,8 @@ const { sequelize } = require("./model/index");
 
 const postRouter = require("./routers/post");
 const userRouter = require("./routers/user");
+const pageRouter = require("./routers/page");
+const tagRouter = require("./routers/hashtag");
 const passportConfig = require("./passport");
 
 const fs = require("fs");
@@ -38,10 +40,6 @@ sequelize
 passportConfig(); //패스포트 설정 실행
 const app = express();
 
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsDoc = require("swagger-jsdoc");
-
-// const options = require("./swagger/swagger");
 const { compareSync } = require("bcrypt");
 
 //클라이언트에서 보내준 데이터를 json으로 파싱해서 req.body에 전송
@@ -107,6 +105,8 @@ app.get("/", (req, res) => {
 
 app.use("/post", postRouter);
 app.use("/user", userRouter);
+app.use("/page", pageRouter);
+app.use("/hashtag", tagRouter);
 
 app.listen(PORT ?? SERVER_PORT, () => {
   console.log(`서버실행중 : http://${SERVER_HOST}:${PORT ?? SERVER_PORT}`);

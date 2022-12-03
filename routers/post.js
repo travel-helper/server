@@ -5,6 +5,8 @@ const path = require("path");
 
 const router = express.Router();
 
+const { isJWT, isNotJWT } = require("../middlewares/jwt.middleware");
+
 const upload = multer({
   storage: multer.diskStorage({
     destination(req, file, cb) {
@@ -18,14 +20,15 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-const { isJWT, isNotJWT } = require("../middlewares/jwt.middleware");
-
 router.get("/", postController.loadPosts);
+router.get("/postId", postController);
 router.post("/", postController.addPost);
 router.post("/img", upload.single("img"), postController.addImg);
-// router.post("/:id/comment", postController.addComment);
-
 router.patch("/:postId", postController.updatePost);
 router.delete("/:postId", postController.deletePost);
 
+router.post("/:postId/comment", postController);
+
+router.patch("/:postId/like", postController);
+router.delete("/:postId/like", postController);
 module.exports = router;
