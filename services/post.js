@@ -24,7 +24,7 @@ exports.addContent = async function (req) {
   return post;
 };
 
-exports.addHashtag = async function (hashtags, post) {
+exports.mapHashtag = async function (hashtags) {
   const result = await Promise.all(
     // promise.all은 인자로 받은 배열의 원소가 모두 fulfilled 상태일때 결과값을 반환
     hashtags.map((tag) =>
@@ -35,8 +35,7 @@ exports.addHashtag = async function (hashtags, post) {
     )
   );
 
-  await post.addHashtags(result.map((v) => v[0])); //반환된 fulfilled객체의 name(해시태그)를=> v ([name,true])
-  //인자로 받은 post에 hashtahg들을 대응시켜 관계 테이블에 저장
+  return result;
 };
 
 exports.addImage = async function (req, post) {
@@ -79,12 +78,12 @@ exports.getFullPost = async function (post) {
 };
 
 exports.addComment = async function (req) {
-  const comment = await Comment.create({
+  const createdComment = await Comment.create({
     content: req.body.content,
     PostId: parseInt(req.params.postId, 10),
     UserId: req.user.id,
   });
-  return comment;
+  return createdComment;
 };
 exports.getFullComment = async function (req) {
   const fullComment = await Comment.findOne({
@@ -98,4 +97,28 @@ exports.getFullComment = async function (req) {
   });
 
   return fullComment;
+};
+
+exports.updatePost = async function (req) {
+  await Post.update(
+    {
+      content: req.body.content,
+    },
+    {
+      where: {
+        id: req.params.postId,
+        UserId: req.body.userId,
+      },
+    }
+  );
+  const post = await Post.findOne({ where: { id: req.params.postId } });
+  return post;
+};
+exports.deletePost = async function (req) {
+  deleteComment = await Post.destroy({
+    where: {
+      id: req.params.postId,
+      UserId: req.body.userId,
+    },
+  });
 };

@@ -41,7 +41,7 @@ const app = express();
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 
-const options = require("./swagger/swagger");
+// const options = require("./swagger/swagger");
 const { compareSync } = require("bcrypt");
 
 //클라이언트에서 보내준 데이터를 json으로 파싱해서 req.body에 전송
