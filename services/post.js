@@ -4,17 +4,48 @@ const { Post, User, Hashtag, Image, Comment } = require("../model");
 const baseResponse = require("../utilities/baseResponseStatus");
 const { errResponse, response } = require("../utilities/response");
 
-exports.loadPosts = async function (lastId) {
+exports.loadPosts = async function (where) {
   const posts = await Post.findAll({
-    attributes: ["id", "text"],
-  }); //임시
+    where,
+    limit: 10,
+    order: [
+      ["createdAt", "DESC"],
+      // [Comment, "createdAt", "DESC"],
+    ],
+    include: [
+      {
+        model: User,
+        // attributes: ["id"],
+        attributes: ["id", "nickname"],
+      },
+      {
+        model: Image,
+      },
+      // {
+      //   model: Comment,
+      //   include: [
+      //     {
+      //       model: User,
+      //       attributes: ["id"],
+      //       // attributes: ["id", "nickname"],
+      //     },
+      //   ],
+      // },
+      // {
+      //   model: User, // 좋아요 누른 사람
+      //   as: "Likers",
+      //   attributes: ["id"],
+      // },
+    ],
+  });
 
   return posts;
 };
 
 exports.addContent = async function (req) {
   // post테이블에 content와 id를 저장
-
+  console.log(req.body.thumbnail);
+  console.log("---------------------");
   const post = await Post.create({
     title: req.body.title,
     content: req.body.content,
@@ -130,15 +161,15 @@ exports.deletePost = async function (req) {
   deleteComment = await Post.destroy({
     where: {
       id: req.params.postId,
-      UserId: req.body.userId,
+      UserId: req.body.userId, //수정 요 >req.user.id
     },
   });
 };
 
-exports.like = async function (post) {
-  await post.addLikers(req.user.id);
+exports.like = async function (post, req) {
+  await post.addLikers(req.body.userId); //수정 요 >req.user.id
 };
 
-exports.unlike = async function (post) {
-  await post.removeLikers(req.user.id);
+exports.unlike = async function (post, req) {
+  await post.removeLikers(req.body.userId); //수정 요 >req.user.id
 };
