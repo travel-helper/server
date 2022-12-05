@@ -46,6 +46,7 @@ const { compareSync } = require("bcrypt");
 app.use(express.json());
 //로그인, 회원가입 등 form태그에서 submit하여 전달할 때 form 파싱
 app.use(express.urlencoded({ extended: false }));
+app.use("/", express.static(path.join(__dirname, "uploads")));
 // app.use(compression());
 app.use(helmet());
 app.use(
