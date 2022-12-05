@@ -130,15 +130,15 @@ exports.deletePost = async function (req) {
   deleteComment = await Post.destroy({
     where: {
       id: req.params.postId,
-      UserId: req.body.userId,
+      UserId: req.body.userId, //수정 요 >req.user.id
     },
   });
 };
 
-exports.like = async function (post) {
-  await post.addLikers(req.user.id);
+exports.like = async function (post, req) {
+  await post.addLikers(req.body.userId); //수정 요 >req.user.id
 };
 
-exports.unlike = async function (post) {
-  await post.removeLikers(req.user.id);
+exports.unlike = async function (post, req) {
+  await post.removeLikers(req.body.userId); //수정 요 >req.user.id
 };

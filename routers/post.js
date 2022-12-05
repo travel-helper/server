@@ -29,7 +29,7 @@ router.delete("/:postId", postController.deletePost);
 
 router.post("/:postId/comment", postController.addComment);
 
-// router.patch("/:postId/like", postController.like);
-// router.delete("/:postId/like", postController.unlike);
+router.patch("/:postId/like", postController.like);
+router.delete("/:postId/like", postController.unlike);
 
 module.exports = router;
