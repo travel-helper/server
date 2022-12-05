@@ -15,8 +15,8 @@ exports.loadPosts = async function (where) {
     include: [
       {
         model: User,
-        attributes: ["id"],
-        // attributes: ["id", "nickname"],
+        // attributes: ["id"],
+        attributes: ["id", "nickname"],
       },
       {
         model: Image,
