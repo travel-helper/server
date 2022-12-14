@@ -167,6 +167,8 @@ exports.deletePost = async function (req) {
 };
 
 exports.like = async function (post, req) {
+  console.log(post);
+  console.log(post.addLikers);
   await post.addLikers(req.body.userId); //수정 요 >req.user.id
 };
 
