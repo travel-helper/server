@@ -126,7 +126,7 @@ exports.addComment = async function (req, res) {
   const comment = await Comment.create({
     content: req.body.content,
     PostId: parseInt(req.params.postId, 10),
-    UserId: req.body.id, //수정 요 >req.user.id
+    UserId: req.user.id, //수정 요 >req.user.id
   });
 
   const fullComment = await Comment.findOne({
@@ -150,7 +150,7 @@ exports.updatePost = async function (req) {
     {
       where: {
         id: req.params.postId,
-        UserId: req.body.userId,
+        UserId: req.user.id,
       },
     }
   );
@@ -161,7 +161,7 @@ exports.deletePost = async function (req) {
   deleteComment = await Post.destroy({
     where: {
       id: req.params.postId,
-      UserId: req.body.userId, //수정 요 >req.user.id
+      UserId: req.user.id, //수정 요 >req.user.id
     },
   });
 };
@@ -169,9 +169,9 @@ exports.deletePost = async function (req) {
 exports.like = async function (post, req) {
   console.log(post);
   console.log(post.addLikers);
-  await post.addLikers(req.body.userId); //수정 요 >req.user.id
+  await post.addLikers(req.user.id); //수정 요 >req.user.id
 };
 
 exports.unlike = async function (post, req) {
-  await post.removeLikers(req.body.userId); //수정 요 >req.user.id
+  await post.removeLikers(req.user.id); //수정 요 >req.user.id
 };

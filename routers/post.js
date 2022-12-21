@@ -26,10 +26,9 @@ router.post("/", postController.addPost);
 router.post("/img", upload.single("img"), postController.addImg);
 router.patch("/:postId", postController.updatePost);
 router.delete("/:postId", postController.deletePost);
-
 router.post("/:postId/comment", postController.addComment);
 
 router.patch("/:postId/like", postController.like);
 router.delete("/:postId/like", postController.unlike);
 
-module.exports = router;
+module.exports=router;
