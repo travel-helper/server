@@ -1,4 +1,4 @@
-const { User } = require("../model");
+const { User, Post } = require("../model");
 // const { Op } = require('sequelize');
 const bcrypt = require("bcrypt");
 const baseResponse = require("../utilities/baseResponseStatus");
@@ -43,18 +43,12 @@ exports.fullUserWithoutPassword = async function (user) {
     attributes: {
       exclude: ["password"], //패스워드 제외
     },
-    // include: [{
-    //   model: Post,
-    //   attributes: ['id'],
-    // }, {
-    //   model: User,
-    //   as: 'Followings',
-    //   attributes: ['id'], //관계형 데이터 포함
-    // }, {
-    //   model: User,
-    //   as: 'Followers',
-    //   attributes: ['id'],
-    // }]
+    include: [
+      {
+        model: Post,
+        attributes: ["id"],
+      },
+    ],
   });
 
   return fullUserWithoutPassword;

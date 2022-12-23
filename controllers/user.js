@@ -10,6 +10,7 @@ const passport = require("passport");
 
 exports.loadUsers = async function (req, res, next) {
   try {
+    console.log("loadUser Done");
     if (req.user) {
       const fullUser = await userService.fullUserWithoutPassword(req.user);
 

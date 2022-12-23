@@ -49,7 +49,7 @@ exports.addPost = async (req, res, next) => {
 
 exports.updatePost = async (req, res, next) => {
   try {
-    const hashtags = req.body.content.match(/#[^\s#]+/g);
+    const hashtags = req.body.inText.match(/#[^\s#]+/g);
     const updatedPost = postService.updatePost(req);
     if (hashtags) {
       const hashResult = await postService.mapHashtag(hashtags); //게시글 해시태그 매핑
@@ -57,7 +57,7 @@ exports.updatePost = async (req, res, next) => {
     }
     res.status(200).json({
       PostId: parseInt(req.params.postId, 10),
-      content: req.body.content,
+      content: req.body.inText,
     });
   } catch (error) {
     console.error(error);

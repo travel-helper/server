@@ -31,11 +31,11 @@ exports.loadPosts = async function (where) {
       //     },
       //   ],
       // },
-      // {
-      //   model: User, // 좋아요 누른 사람
-      //   as: "Likers",
-      //   attributes: ["id"],
-      // },
+      {
+        model: User, // 좋아요 누른 사람
+        as: "Likers",
+        attributes: ["id"],
+      },
     ],
   });
 
@@ -44,15 +44,14 @@ exports.loadPosts = async function (where) {
 
 exports.addContent = async function (req) {
   // post테이블에 content와 id를 저장
-  console.log(req.body.thumbnail);
-  console.log("---------------------");
+
   const post = await Post.create({
     title: req.body.title,
     content: req.body.content,
     tema: req.body.tema,
     region: req.body.region,
     thumbnail: req.body.thumbnail,
-    // price:req.body.price,
+    price_range: req.body.priceRange,
     UserId: req.user.dataValues.id,
 
     // UserId: req.body.id, //수정 요 >req.user.id
@@ -145,7 +144,7 @@ exports.addComment = async function (req, res) {
 exports.updatePost = async function (req) {
   await Post.update(
     {
-      content: req.body.content,
+      content: req.body.inText,
     },
     {
       where: {
@@ -155,6 +154,7 @@ exports.updatePost = async function (req) {
     }
   );
   const post = await Post.findOne({ where: { id: req.params.postId } });
+
   return post;
 };
 exports.deletePost = async function (req) {
@@ -167,8 +167,6 @@ exports.deletePost = async function (req) {
 };
 
 exports.like = async function (post, req) {
-  console.log(post);
-  console.log(post.addLikers);
   await post.addLikers(req.user.id); //수정 요 >req.user.id
 };
 
